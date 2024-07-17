@@ -28,3 +28,23 @@ This is a RESTful API developed using Spring Boot, designed to manage a catalog 
 ```sh
 git clone https://github.com/nickemma/springboot-rest-api.git
 cd springboot-rest-api
+``` 
+### Build and Run the Application
+Use Maven to build and run the application:
+```sh
+mvn clean install
+mvn spring-boot:run
+```
+The application will start on `http://localhost:8080`.
+
+### API Documentation
+The API documentation is available at `http://localhost:8080/swagger-ui.html`.
+
+### License
+This project is licensed under the [MIT](LICENSE) - see the LICENSE file for details.
+
+## Acknowledgments
+
+- [Instructor](https://aliboucoding.com/courses/) for the teaching inspiration to learn spring boot.
+
+Feel free to adjust the content to better fit your project specifics and personal preferences. If you need further customization or additional sections, let me know!
