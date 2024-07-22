@@ -1,20 +1,20 @@
 package com.techieemma.learning;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "T_STUDENTS")
 public class Student {
 
     @Id
+    @GeneratedValue
     private Integer id;
 
-    private String first_name;
+    @Column(name = "first_name")
+    private String firstName;
 
-    private String last_name;
+    @Column(name = "last_name")
+    private String lastName;
 
     @Column(
             unique = true
@@ -25,19 +25,11 @@ public class Student {
 
     public Student(){}
 
-    public Student(String first_name, String last_name, String email, int age) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public Student(String firstName, String lastName, String email, int age) {
+        this.firstName = firstName.toLowerCase();
+        this.lastName = lastName.toLowerCase();
         this.email = email;
         this.age = age;
-    }
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
     }
 
     public Integer getId() {
@@ -48,20 +40,28 @@ public class Student {
         this.id = id;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName.toLowerCase();
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName.toLowerCase();
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
     }
 
     public int getAge() {
