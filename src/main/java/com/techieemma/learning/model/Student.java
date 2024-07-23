@@ -1,6 +1,7 @@
 package com.techieemma.learning.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -34,6 +35,7 @@ public class Student {
     @JoinColumn(
             name = "school_id"
     )
+    @JsonBackReference
     private School school;
 
     public StudentProfile getStudentProfile() {
@@ -55,8 +57,8 @@ public class Student {
     public Student(){}
 
     public Student(String firstName, String lastName, String email, int age) {
-        this.firstName = firstName.toLowerCase();
-        this.lastName = lastName.toLowerCase();
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.age = age;
     }
@@ -74,7 +76,7 @@ public class Student {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName.toLowerCase();
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -82,7 +84,7 @@ public class Student {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName.toLowerCase();
+        this.lastName = lastName;
     }
 
     public String getEmail() {

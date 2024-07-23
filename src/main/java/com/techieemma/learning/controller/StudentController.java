@@ -2,7 +2,10 @@ package com.techieemma.learning.controller;
 
 
 import com.techieemma.learning.data.StudentResponse;
+import com.techieemma.learning.model.School;
 import com.techieemma.learning.model.Student;
+import com.techieemma.learning.records.StudentDTO;
+import com.techieemma.learning.records.StudentResponseDTO;
 import com.techieemma.learning.repository.StudentRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,10 +21,31 @@ public class StudentController {
     }
 
     @PostMapping("/students")
-    public Student create(@RequestBody Student student) {
-        student.setFirstName(student.getFirstName());
-        student.setLastName(student.getLastName());
-        return repository.save(student);
+    public StudentResponseDTO create(@RequestBody StudentDTO studentDto) {
+        var student = toStudent(studentDto);
+        var savedStudent = repository.save(student);
+        return toStudentResponseDto(savedStudent);
+    }
+
+    private Student toStudent(StudentDTO dto){
+        var student = new Student();
+        student.setFirstName(dto.firstName());
+        student.setLastName(dto.lastName());
+        student.setEmail(dto.email());
+
+        var school = new School();
+        school.setId(dto.schoolId());
+
+        student.setSchool(school);
+        return student;
+    }
+
+    private StudentResponseDTO toStudentResponseDto(Student student){
+        return new StudentResponseDTO(
+                student.getFirstName(),
+                student.getLastName(),
+                student.getEmail()
+        );
     }
 
     @GetMapping("/students")
@@ -40,7 +64,7 @@ public class StudentController {
     public List<Student> findStudentsByName(
             @PathVariable("name") String name
     ) {
-        return repository.findAllByFirstNameContaining(name.toLowerCase());
+        return repository.findAllByFirstNameContaining(name);
     }
 
     @PutMapping("students/{id}")
