@@ -1,4 +1,7 @@
-package com.techieemma.learning;
+package com.techieemma.learning.data;
+
+import com.techieemma.learning.model.Student;
+
 import java.util.List;
 
 public class StudentResponse {

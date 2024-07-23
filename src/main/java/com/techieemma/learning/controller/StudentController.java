@@ -1,22 +1,24 @@
-package com.techieemma.learning;
+package com.techieemma.learning.controller;
 
-import org.springframework.http.HttpStatus;
+
+import com.techieemma.learning.data.StudentResponse;
+import com.techieemma.learning.model.Student;
+import com.techieemma.learning.repository.StudentRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
 
 @RestController
-public class FirstController {
-
+public class StudentController {
     private final StudentRepository repository;
 
-    public FirstController(StudentRepository repository) {
+    public StudentController(StudentRepository repository) {
         this.repository = repository;
     }
 
     @PostMapping("/students")
-        public Student create(@RequestBody Student student) {
+    public Student create(@RequestBody Student student) {
         student.setFirstName(student.getFirstName());
         student.setLastName(student.getLastName());
         return repository.save(student);
